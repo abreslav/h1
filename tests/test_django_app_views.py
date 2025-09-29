@@ -38,10 +38,9 @@ class TestRequestLoggingMixin(TestCase):
         # Setup time mocking
         mock_time.side_effect = [1000.0, 1000.5]  # 0.5 second processing time
 
-        # Create request
-        request = self.factory.get('/test/', HTTP_USER_AGENT='TestAgent')
+        # Create request with body data
+        request = self.factory.get('/test/', data='test body', content_type='text/plain', HTTP_USER_AGENT='TestAgent')
         request.build_absolute_uri = Mock(return_value='http://testserver/test/')
-        request.body = b'test body'
 
         # Execute dispatch
         response = self.test_view.dispatch(request)
@@ -85,7 +84,6 @@ class TestRequestLoggingMixin(TestCase):
         # Create request
         request = self.factory.post('/test/')
         request.build_absolute_uri = Mock(return_value='http://testserver/test/')
-        request.body = b''
 
         # Execute dispatch
         response = self.test_view.dispatch(request)
