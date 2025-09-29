@@ -1,0 +1,22 @@
+{
+    "django_app/views.py": [
+        {
+            "method": {
+                "enclosing_classes": [
+                    "RequestLoggingMixin"
+                ],
+                "method_name": "dispatch"
+            },
+            "kind": "unit_tests"
+        },
+        {
+            "method": {
+                "enclosing_classes": [
+                    "HomeView"
+                ],
+                "method_name": "get"
+            },
+            "kind": "endpoint_tests"
+        }
+    ]
+}
