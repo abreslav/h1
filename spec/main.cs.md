@@ -1,17 +1,16 @@
-// This is a comment. This line is ignored.
-// Here’s an example of a CodeSpeak spec file.
+HelloDB is a demo app to showcase using a database.
 
-HelloWorld is a simple web app that displays a greeting.
-
-# Tech Stack
+# Technology
 
 - Django
 - Tailwind CSS
+- SQLite
 
-# Routing
+# Main page
 
-The app responds to only one route (/).
+Use the Demo table in the DB with fields:
+- name
+- description
 
-# User Interface
-
-A nice looking HTML page with the message: "Hello from CodeSpeak!"
+Show a table displaying all records.
+Below: edit boxes for each field and an "Add" button.
