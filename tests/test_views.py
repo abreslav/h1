@@ -24,8 +24,9 @@ class TestViews(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
 
-        # Verify template is used
-        self.assertContains(response, 'demos')
+        # Verify template content is rendered
+        self.assertContains(response, 'HelloDB Demo')
+        self.assertContains(response, 'Add New Demo Record')
 
     @pytest.mark.timeout(30)
     def test_home_post_valid_data(self):
@@ -147,7 +148,7 @@ class TestViews(TestCase):
         request = Mock(spec=HttpRequest)
         request.method = 'POST'
         request.build_absolute_uri.return_value = 'http://example.com/error'
-        request.META = {}
+        request.META = {'CONTENT_LENGTH': '50'}
         request.body = b''
 
         # Create mock response with error status
@@ -170,3 +171,36 @@ class TestViews(TestCase):
             # Verify error response body is logged
             self.assertEqual(logged_data['response_status'], 400)
             self.assertEqual(logged_data['response_body'], 'Bad Request Error')
+
+    @pytest.mark.timeout(30)
+    def test_log_request_response_body_exception(self):
+        """
+        Test kind: unit_tests
+        Original method: log_request_response
+        """
+        # Create mock request that raises exception when accessing body
+        request = Mock(spec=HttpRequest)
+        request.method = 'POST'
+        request.build_absolute_uri.return_value = 'http://example.com/test'
+        request.META = {'CONTENT_LENGTH': '100'}
+        request.body.side_effect = Exception("Cannot access body")
+
+        # Create mock response
+        response = Mock(spec=HttpResponse)
+        response.status_code = 200
+        response.content = b'test response'
+        response.items.return_value = []
+
+        start_time = time.time()
+
+        with patch('django_app.views.logger') as mock_logger:
+            log_request_response(request, response, start_time)
+
+            # Verify logger.info was called
+            mock_logger.info.assert_called_once()
+
+            # Parse the logged JSON
+            logged_data = json.loads(mock_logger.info.call_args[0][0])
+
+            # Verify request body size falls back to CONTENT_LENGTH
+            self.assertEqual(logged_data['request_body_size'], 100)

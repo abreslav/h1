@@ -22,8 +22,12 @@ def log_request_response(request, response, start_time):
     # Get response headers
     response_headers = dict(response.items()) if hasattr(response, 'items') else {}
 
-    # Get request body size
-    request_body_size = len(request.body) if hasattr(request, 'body') else 0
+    # Get request body size (handle RawPostDataException for POST requests)
+    try:
+        request_body_size = len(request.body) if hasattr(request, 'body') else 0
+    except Exception:
+        # If we can't access body (e.g., after POST data has been read), estimate from headers
+        request_body_size = int(request.META.get('CONTENT_LENGTH', 0))
 
     # Get response body size
     response_body_size = len(response.content) if hasattr(response, 'content') else 0
