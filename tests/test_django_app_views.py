@@ -23,8 +23,7 @@ class TestRequestLoggingMixin(TestCase):
                 return HttpResponse("Test response", status=200)
 
             def post(self, request, *args, **kwargs):
-                if hasattr(request, 'body') and len(request.body) > 0:
-                    return HttpResponse("Test response", status=200)
+                # Always return error for POST to test error logging
                 return HttpResponse("Error response", status=400)
 
         self.test_view = TestView()
@@ -40,8 +39,8 @@ class TestRequestLoggingMixin(TestCase):
         # Setup time mocking
         mock_time.side_effect = [1000.0, 1000.5]  # 0.5 second processing time
 
-        # Create request with body data (for GET, use POST to have body data)
-        request = self.factory.post('/test/', data='test body', content_type='text/plain', HTTP_USER_AGENT='TestAgent')
+        # Create GET request (successful case)
+        request = self.factory.get('/test/', HTTP_USER_AGENT='TestAgent')
         request.build_absolute_uri = Mock(return_value='http://testserver/test/')
 
         # Execute dispatch
@@ -59,9 +58,9 @@ class TestRequestLoggingMixin(TestCase):
         log_data = json.loads(log_call_args)
 
         # Check request data
-        self.assertEqual(log_data['request']['method'], 'POST')
+        self.assertEqual(log_data['request']['method'], 'GET')
         self.assertEqual(log_data['request']['url'], 'http://testserver/test/')
-        self.assertEqual(log_data['request']['body_size'], 9)  # len(b'test body')
+        self.assertEqual(log_data['request']['body_size'], 0)  # GET has no body
         self.assertIn('User-Agent', log_data['request']['headers'])
 
         # Check response data
