@@ -1,0 +1,111 @@
+{
+    "meta": {
+        "schema": {
+            "spec": {
+                "type": "file",
+                "relative_path": "spec.processed.md",
+                "format": "text",
+                "by_phase": "ProcessSpec"
+            },
+            "external_apis": {
+                "type": "file",
+                "relative_path": "external_apis.json",
+                "format": "json",
+                "by_phase": "AnalyzeExternalApis"
+            },
+            "methods_to_test": {
+                "type": "file",
+                "relative_path": "methods_to_test.json",
+                "format": "json",
+                "by_phase": "AnalyzeAndPlanTests"
+            },
+            "methods_to_test_raw": {
+                "type": "file",
+                "relative_path": "methods_to_test_raw.json",
+                "format": "json",
+                "by_phase": "AnalyzeAndPlanTests"
+            },
+            "test_reports": {
+                "type": "file",
+                "relative_path": "test_reports.txt",
+                "format": "text",
+                "by_phase": "GenerateAndRunTests"
+            },
+            "sha_to_checkpoint": {
+                "type": "file",
+                "relative_path": "sha_to_checkpoint.json",
+                "format": "json"
+            }
+        },
+        "version": "0.2.0"
+    },
+    "phases_state": {
+        "spec_file": "spec/main.cs.md",
+        "spec": "spec.processed.md",
+        "criteria": {
+            "console_application": false,
+            "has_django": true,
+            "has_external_apis": false,
+            "has_javascript": true,
+            "has_node_js": false,
+            "has_python": true,
+            "has_server": true,
+            "has_sql_database": true,
+            "server": false,
+            "web_application": true
+        },
+        "external_apis": "external_apis.json",
+        "commit_message": "Implement HelloDB demo app with Django and Tailwind CSS",
+        "methods_to_test_raw": "methods_to_test_raw.json",
+        "methods_to_test": "methods_to_test.json",
+        "test_reports": "test_reports.txt"
+    },
+    "phase_manager": {
+        "history": [
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"Init\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:19.752981+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"ProcessSpec\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:19.769278+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"EvaluateCriteria\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:31.880971+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"AnalyzeExternalApis\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:37.926078+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"CheckExternalApisConfigurationFile\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:37.950314+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"SetupProject\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:27:43.082533+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"ImplementSpecWithClaudeCode\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:31:20.060152+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"FeedbackLoopWithClaudeCode\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:31:21.497307+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"AnalyzeAndPlanTests\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:31:34.552546+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"GenerateAndRunTests\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:33:49.351549+00:00"
+            },
+            {
+                "checkpoint": "{\"run\":{\"id\":\"675ada89-7fa1-4982-815e-14000ca38fdc\",\"kind\":\"build\"},\"phase_id\":\"Done\",\"additional_id\":null}",
+                "timestamp": "2025-09-29T16:33:49.367446+00:00"
+            }
+        ]
+    }
+}

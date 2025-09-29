@@ -1,0 +1,29 @@
+{
+    "django_app/models.py": [
+        {
+            "method": {
+                "enclosing_classes": [
+                    "Demo"
+                ],
+                "method_name": "__str__"
+            },
+            "kind": "unit_tests"
+        }
+    ],
+    "django_app/views.py": [
+        {
+            "method": {
+                "enclosing_classes": [],
+                "method_name": "home"
+            },
+            "kind": "endpoint_tests"
+        },
+        {
+            "method": {
+                "enclosing_classes": [],
+                "method_name": "log_request_response"
+            },
+            "kind": "unit_tests"
+        }
+    ]
+}
